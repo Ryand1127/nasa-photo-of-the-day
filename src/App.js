@@ -3,6 +3,13 @@ import "./App.css";
 import Header from "./components/Header";
 import PhotoBox from "./components/PhotoBox";
 import axios from 'axios';
+import Footer from './components/Footer';
+import styled from 'styled-components';
+
+const StyledApp = styled.div`
+  background-color: #e6e6e6
+`
+
 
 function App() {
 
@@ -12,7 +19,7 @@ function App() {
   function getData() {
     axios
       .get(
-        'https://api.nasa.gov/planetary/apod?api_key=1u2MxYeEkxOXBZ9jVFCWVpTr27aiJLFkjGf4Uvrg'
+        'https://api.nasa.gov/planetary/apod?api_key=78ZqNbNAklbSbejctPmiB8D0pzwfqI8k4XGitcGH'
       )
       .then((res) => {
           setNasaData(res.data)
@@ -26,10 +33,11 @@ function App() {
 
   console.log(nasaData)
   return (
-    <div className="App">
-      <Header/>
-      <PhotoBox imgSrc={nasaData.url} imgAlt={nasaData.title} imgExp={nasaData.explanation} media={nasaData.media_type}/>
-    </div>
+    <StyledApp className="App">
+      <Header imgAlt={nasaData.title}/>
+      <PhotoBox imgSrc={nasaData.url} imgAlt={nasaData.title} imgExp={nasaData.explanation} media={nasaData.media_type} copyright={nasaData.copyright} date={nasaData.date}/>
+      <Footer/>
+    </StyledApp>
   );
 }
 
